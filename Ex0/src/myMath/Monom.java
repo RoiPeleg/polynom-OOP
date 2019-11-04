@@ -48,8 +48,53 @@ public class Monom implements function{
 	// ***************** add your code below **********************
 	public Monom(String s) 
 	{
-		
-		this(Double.parseDouble(s.split("*")[0]), Integer.parseInt(s.split("^")[1]));
+		s = s.toLowerCase();
+		if(s.contains("x"))
+		{
+			if(s.contains("-") && s.length()==2)
+			{
+				this._coefficient = -1.0;
+				this._power = 1;
+			}
+			else
+			{
+				try 
+				{
+					this._coefficient = Double.parseDouble(s.split("x")[0]);
+					if(s.charAt(s.length()-1)=='x')
+					{
+						this._power = 1;
+					}
+					else
+					{
+						if(s.charAt(s.indexOf('x')+1)=='^')
+						{
+							String[] s1 = s.split("\\^");
+							this._power = Integer.parseInt(s1[1]);
+						}
+						else
+							throw new RuntimeException("after x must be power symbol");
+					}
+				}
+
+				catch (Exception e)
+				{
+					throw e;
+				}
+			}
+		}
+		else
+		{
+			try 
+			{
+				this._coefficient =  Double.parseDouble(s);
+				this._power = 0;
+			}
+			catch (Exception e)
+			{
+				throw e;
+			}
+		}
 	}
 
 	public void add(Monom m) 
@@ -67,10 +112,25 @@ public class Monom implements function{
 		this._coefficient = this._coefficient*d._coefficient;
 		this._power += d._power;
 	}
-
+	public boolean equals(Monom d1)
+	{
+		if(this._power != d1.get_power())return false;
+		else if(this._coefficient != d1.get_coefficient())
+		{
+			return false;
+		}
+		return true;
+	}
+	{
+		
+	}
 	public String toString() {
 		String ans = "";
-		ans+= this._coefficient+" *x^"+this._power;
+		ans+= this._coefficient;
+		if(this._power != 0)
+		{
+			ans += "x^"+this._power;
+		}
 		return ans;
 	}
 	// you may (always) add other methods.
@@ -88,6 +148,8 @@ public class Monom implements function{
 	private static Monom getNewZeroMonom() {return new Monom(ZERO);}
 	private double _coefficient; 
 	private int _power;
+	
+	
 
 
 }

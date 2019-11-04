@@ -40,7 +40,6 @@ public class MonomTest {
 		monoms.add(new Monom(-1,0));
 		monoms.add(new Monom(-1.3,1));
 		monoms.add(new Monom(-2.2,2));
-		
 		for(int i=0;i<monoms.size();i++) {
 			Monom m = new Monom(monoms.get(i));
 			String s = m.toString();
