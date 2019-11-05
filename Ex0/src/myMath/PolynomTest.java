@@ -8,12 +8,13 @@ public class PolynomTest {
 	public static void test1() {
 		Polynom p1 = new Polynom();
 		String[] monoms = {"1","x","x^2", "0.5x^2"};
-		//for(int i=0;i<monoms.length;i++) {
-		Monom m = new Monom(monoms[1]);
-		p1.add(m);
-		double aa = p1.area(0, 1, 0.0001);
-		p1.substract(p1);
-		System.out.println(p1);
+		for (int i = 0; i < monoms.length; i++) {
+			Monom m = new Monom(monoms[i]);
+			p1.add(m);
+			double aa = p1.area(0, 1, 0.0001);
+			p1.substract(p1);
+			System.out.println(p1);
+		}
 	}
 	public static void test2() {
 		Polynom p1 = new Polynom(), p2 =  new Polynom();
@@ -34,7 +35,8 @@ public class PolynomTest {
 		p1.multiply(p2);
 		System.out.println("(p1+p2)*p2: "+p1);
 		String s1 = p1.toString();
-		Polynom_able pp1 = Polynom.parse(s1);
+		//Polynom_able pp1 = Polynom.parse(s1);
+		Polynom pp1 = new Polynom(s1);
 		System.out.println("from string: "+pp1);
 	}
 }
