@@ -32,25 +32,29 @@ public class Polynom implements Polynom_able {
 	 */
 	public Polynom(String s) {
 		this();
+		ArrayList<Monom> ls1 = new ArrayList<Monom>();
 		s.toLowerCase();
 		Monom mm;
 		String[] monos = s.split("\\+|\\-");
-		String signs = s.replaceAll("[0-9]", "").replaceAll("\\^", "").replaceAll("x", "");
-		for (int i = 0; i < monos.length; i++) {
+		String signs = s.replaceAll("[0-9]", "").replaceAll("\\^", "").replaceAll("x", "").replaceAll(".", "");
+		for (int i = 0; i < monos.length; i++) 
+		{
 			mm = new Monom(monos[i]);
-			if (ls.get(mm.get_power()) == null)
-				ls.add(mm.get_power(), mm);
-			else
-				ls.get(mm.get_power()).add(mm);
+			ls1.add(mm);
 		}
 		int i = 0;
 		if (s.charAt(0) != '-') i++;
 		for (i = 0; i < signs.length(); i++) {
 			if (s.charAt(i) == '-') {
-				ls.get(i).multipy(new Monom("-1"));
+				ls1.get(i).multipy(new Monom("-1"));
 			}
 		}
+		for(i=0;i<ls1.size();i++)
+		{
+			add(ls1.get(i));
+		}
 	}
+
 
 	@Override
 	public double f(double x) {
@@ -69,8 +73,37 @@ public class Polynom implements Polynom_able {
 	 * @param m1: is a monom to add
 	 */
 	@Override
-	public void add(Monom m1) {
-		ls.get(m1.get_power()).add(m1);
+	public void add(Monom m1) { //adding and sorting
+		{
+			if(ls.isEmpty())
+				ls.add(m1);
+			else
+			{
+				int c = 0;
+				for(int i = 0;i<ls.size() && ls.get(i).get_power()<m1.get_power();i++)
+					c++;
+				if(c==ls.size())
+					ls.add(m1);
+				else
+				{
+					if(ls.get(c).get_power()==m1.get_power())
+						ls.get(c).add(m1);	
+					else
+						ls.add(c, m1);
+				}
+			}
+		}
+	}
+	@Override
+	public String toString()
+	{
+		String str = "";
+		for(int i=0;i<ls.size()-1;i++)
+		{ 
+			str+=ls.get(i).toString()+"+";
+		}
+		str+=ls.get(ls.size()-1).toString();
+		return str;
 	}
 
 	@Override

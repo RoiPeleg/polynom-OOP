@@ -7,8 +7,9 @@ public class PolynomTest {
 	}
 	public static void test1() {
 		Polynom p1 = new Polynom();
-		String[] monoms = {"1","x","x^2", "0.5x^2"};
-		for (int i = 0; i < monoms.length; i++) {
+		String[] monoms = {"x","1","x^2", "0.5x^2"};//I change the insertion order to check if the sorting algorithm works
+		for (int i = 0; i < monoms.length; i++)
+		{
 			Monom m = new Monom(monoms[i]);
 			p1.add(m);
 			double aa = p1.area(0, 1, 0.0001);

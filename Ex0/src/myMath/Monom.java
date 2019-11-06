@@ -122,9 +122,12 @@ public class Monom implements function {
 
     public String toString() {
         String ans = "";
-        ans += this._coefficient;
         if (this._power != 0) {
-            ans += "x^" + this._power;
+            ans += this._coefficient+"x^" + this._power;
+        }
+        else
+        {
+        	ans += this._coefficient;
         }
         return ans;
     }
