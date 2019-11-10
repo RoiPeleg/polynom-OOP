@@ -3,19 +3,28 @@ package myMath;
 public class PolynomTest {
 	public static void main(String[] args) {
 		test1();
-		test2();
+		//test2();
 	}
 	public static void test1() {
 		Polynom p1 = new Polynom();
-		String[] monoms = {"x","1","x^2", "0.5x^2"};//I change the insertion order to check if the sorting algorithm works
+		String[] monoms = {"2x^3","1","x^2", "0.5x^2"};//I change the insertion order to check if the sorting algorithm works
 		for (int i = 0; i < monoms.length; i++)
 		{
 			Monom m = new Monom(monoms[i]);
 			p1.add(m);
-			double aa = p1.area(0, 1, 0.0001);
+			
 			p1.substract(p1);
 			System.out.println(p1);
 		}
+		System.out.println(p1.derivative());
+		System.out.println(p1.f(2.0));
+		System.out.println(p1.area(0, 1, 0.00001));
+		
+		String s = "2x^3+1+x^2+0.5x^2";
+		Polynom p2 = new Polynom(s);
+		p1.add(p2);
+		System.out.println(p1);
+		
 	}
 	public static void test2() {
 		Polynom p1 = new Polynom(), p2 =  new Polynom();
