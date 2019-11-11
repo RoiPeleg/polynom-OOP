@@ -60,7 +60,6 @@ public class Polynom implements Polynom_able {
 
 	@Override
 	public double f(double x) {
-		// TODO Auto-generated method stub
 		if(this.isEmpty())
 			return 0;
 		double sum = 0;
@@ -93,7 +92,11 @@ public class Polynom implements Polynom_able {
 
 	}
 
-	
+    /**
+     * adds a moonom to current ploynom
+     *
+     * @param m1 Monom - new monom to add
+     */
 	@Override
 	public void add(Monom m1) { //adding and sorting
 		{
@@ -123,37 +126,34 @@ public class Polynom implements Polynom_able {
 	}
 
 	@Override
-	public String toString()
-	{
-		String str = "";
-		for(int i=0;i<ls.size()-1;i++)
-		{ 
-			str+=ls.get(i).toString()+"+";
-		}
-		str+=ls.get(ls.size()-1).toString();
-		return str;
-	}
+    public String toString() {
+        String str = "";
+        for (int i = 0; i < ls.size() - 1; i++) {
+            str += ls.get(i).toString() + "+";
+        }
+        str += ls.get(ls.size() - 1).toString();
+        return str;
+    }
 
-	@Override
-	public void substract(Polynom_able p1) {
-		// TODO Auto-generated method stub
-		if(p1 instanceof Polynom)
-		{
-			if(ls.isEmpty())
-				throw new RuntimeException("list empty");
-			Iterator<Monom> it = p1.iteretor();
-			while (it.hasNext()) {
-				Monom monom = (Monom) it.next();
-				this.add(monom);			
-			}
-		}
-		else
-		{
-			throw new RuntimeException("not polynom instance");
-		}
-
-
-	}
+    /**
+     * substracts a polynom from current one
+     *
+     * @param p1 - polynom to be substracted
+     */
+    @Override
+    public void substract(Polynom_able p1) {
+        if (p1 instanceof Polynom) {
+            if (ls.isEmpty())
+                throw new RuntimeException("list empty");
+            Iterator<Monom> it = p1.iteretor();
+            while (it.hasNext()) {
+                Monom monom = (Monom) it.next();
+                this.add(monom);
+            }
+        } else {
+            throw new RuntimeException("not polynom instance");
+        }
+    }
 
 	@Override
 	public void multiply(Polynom_able p1) {
@@ -169,57 +169,75 @@ public class Polynom implements Polynom_able {
 
 	@Override
 	public boolean isZero() {
-		// TODO Auto-generated method stub
+        if (this.equals(new Polynom())) return true;
 		return false;
 	}
 
 	@Override
-	public double root(double x0, double x1, double eps) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public double root(double x0, double x1, double eps) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	@Override
-	public Polynom_able copy() {
-		// TODO Auto-generated method stub
-		if(this.isEmpty())
-			return null;
-		Polynom_able p = new Polynom();
-		for (Monom monom : ls){
-			p.add(new Monom(monom));
-		}
-		return p;
-	}
+    /**
+     * returns new copy of this polynom
+     *
+     * @return
+     */
+    @Override
+    public Polynom_able copy() {
+        // TODO Auto-generated method stub
+        if (this.isEmpty())
+            return null;
+        Polynom_able p = new Polynom();
+        for (Monom monom : ls) {
+            p.add(new Monom(monom));
+        }
+        return p;
+    }
 
-	@Override
-	public Polynom_able derivative() {
-		// TODO Auto-generated method stub
-		if(this.isEmpty())
-			return null;
-		Polynom_able p = new Polynom();
-		for (Monom monom : ls) {
-			p.add(monom.derive());
-		}
+    /**
+     * return a Polynom that represnts the current polynom derivative
+     *
+     * @return Polynom_able
+     */
+    @Override
+    public Polynom_able derivative() {
+        // TODO Auto-generated method stub
+        if (this.isEmpty())
+            return null;
+        Polynom_able p = new Polynom();
+        for (Monom monom : ls) {
+            p.add(monom.derive());
+        }
+        return p;
+    }
 
-		return p;
-	}
+    /**
+     * @param x0  starting pooint
+     * @param x1  end point
+     * @param eps positive step value
+     * @return
+     */
+    @Override
+    public double area(double x0, double x1, double eps) {
+        double sum = 0;
+        for (double i = x0; i < x1; i += eps) {
+            sum += this.f(i) * eps;
+        }
+        return sum;
+    }
 
-	@Override
-	public double area(double x0, double x1, double eps) {
-		double sum = 0;
-		for(double i = x0;i<x1;i+=eps)
-		{
-			sum+=this.f(i)*eps;
-		}
-		// TODO Auto-generated method stub
-		return sum;
-	}
-
-	@Override
-	public Iterator<Monom> iteretor() {
-		Iterator<Monom> m = ls.iterator();
-		return m;
-	}
+    /**
+     * returns the list's iterator
+     *
+     * @return Iterator<Monom>
+     */
+    @Override
+    public Iterator<Monom> iteretor() {
+        Iterator<Monom> m = ls.iterator();
+        return m;
+    }
 
 	@Override
 	public void multiply(Monom m1) {
