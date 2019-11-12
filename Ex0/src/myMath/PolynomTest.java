@@ -3,8 +3,9 @@ package myMath;
 
 public class PolynomTest {
 	public static void main(String[] args) {
-		test1();
+		//test1();
 		//test2();
+		test3();
 	}
 	public static void test1() {
 		Polynom_able p1 = new Polynom();
@@ -62,5 +63,16 @@ public class PolynomTest {
 		//Polynom_able pp1 = Polynom.parse(s1);
 		Polynom pp1 = new Polynom(s1);
 		System.out.println("from string: "+pp1);
+	}
+	
+	public static void test3() {
+		String s = "x^3+1-2x^2";
+		String s1 = "x+1";
+		Polynom_able p1 = new Polynom(s);
+		Polynom_able p5 = new Polynom(s1);
+		System.out.println(p1);
+		System.out.println(p1.root(1, -0.5, 0.1));
+		System.out.println(p1.root(1, -0.5, 0.0001));
+		
 	}
 }
