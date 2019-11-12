@@ -57,6 +57,20 @@ public class Polynom implements Polynom_able {
 		}
 	}
 
+	private void eraseZeros()
+	{
+		for(int i = 0;i<ls.size();i++)
+		{
+			if(ls.get(i).get_coefficient()==0.0)
+			{
+				ls.remove(i);
+				i--;
+			}
+			
+		}
+	}
+
+
 
 	@Override
 	public double f(double x) {
@@ -75,11 +89,9 @@ public class Polynom implements Polynom_able {
 	 */
 	@Override
 	public void add(Polynom_able p1) {
-		if (p1 == null || isEmpty()) throw new RuntimeException("can't compute null");
+		if (p1 == null) throw new RuntimeException("can't compute null");
 		if(p1 instanceof Polynom)
 		{
-			if(ls.isEmpty())
-				throw new RuntimeException("list empty");
 			Iterator<Monom> it = p1.iteretor();
 			while (it.hasNext()) {
 				Monom monom = (Monom) it.next();
@@ -90,13 +102,14 @@ public class Polynom implements Polynom_able {
 		{
 			throw new RuntimeException("not polynom instance");
 		}
+		this.eraseZeros();
 	}
 
-    /**
-     * adds a moonom to current ploynom
-     *
-     * @param m1 Monom - new monom to add
-     */
+	/**
+	 * adds a moonom to current ploynom
+	 *
+	 * @param m1 Monom - new monom to add
+	 */
 	@Override
 	public void add(Monom m1) { //adding and sorting
 		{
@@ -117,6 +130,7 @@ public class Polynom implements Polynom_able {
 					else
 						ls.add(c, m1);
 				}
+				this.eraseZeros();
 			}
 		}
 	}
@@ -127,33 +141,36 @@ public class Polynom implements Polynom_able {
 	}
 
 	@Override
-    public String toString() {
-        String str = "";
-        for (int i = 0; i < ls.size() - 1; i++) {
-            str += ls.get(i).toString() + "+";
-        }
-        str += ls.get(ls.size() - 1).toString();
-        return str;
-    }
+	public String toString() {
+		String str = "";
+		if(ls.isEmpty()) { return "0"; }
+		for (int i = 0; i < ls.size() - 1; i++) {
+			str += ls.get(i).toString() + "+";
+		}
+		str += ls.get(ls.size() - 1).toString();
+		return str;
+	}
 
-    /**
-     * substracts a polynom from current one
-     *
-     * @param p1 - polynom to be substracted
-     */
-    @Override
-    public void substract(Polynom_able p1) {
+	/**
+	 * subtracts a polynom from current one
+	 *
+	 * @param p1 - polynom to be subtracted
+	 */
+	@Override
+	public void substract(Polynom_able p1) {
 		if (p1 == null || isEmpty()) throw new RuntimeException("can't compute null");
 		if (p1 instanceof Polynom) {
-            Iterator<Monom> it = p1.iteretor();
-            while (it.hasNext()) {
-                Monom monom = (Monom) it.next();
-                this.add(monom.flip());	
-            }
-        } else {
-            throw new RuntimeException("not polynom instance");
-        }
-    }
+			Iterator<Monom> it = p1.iteretor();
+			while (it.hasNext()) {
+				Monom monom = (Monom) it.next();
+				this.add(monom.flip());	
+			}
+			this.eraseZeros();
+		} else {
+			throw new RuntimeException("not polynom instance");
+		}
+
+	}
 
 	/**
 	 * @param p1 - polyom to multply
@@ -171,6 +188,7 @@ public class Polynom implements Polynom_able {
 			this.add(temp2);
 			temp2 = temp3.copy();
 		}
+		this.eraseZeros();
 	}
 
 	/**
@@ -194,7 +212,7 @@ public class Polynom implements Polynom_able {
 	 */
 	@Override
 	public boolean isZero() {
-        if (this.equals(new Polynom())) return true;
+		if (this.equals(new Polynom())) return true;
 		return false;
 	}
 
@@ -215,63 +233,63 @@ public class Polynom implements Polynom_able {
 		return 0;
 	}
 
-    /**
-     * returns new copy of this polynom
-     *
-     * @return
-     */
-    @Override
-    public Polynom_able copy() {
-        if (this.isEmpty())
-            return null;
-        Polynom_able p = new Polynom();
-        for (Monom monom : ls) {
-            p.add(new Monom(monom));
-        }
-        return p;
-    }
+	/**
+	 * returns new copy of this polynom
+	 *
+	 * @return
+	 */
+	@Override
+	public Polynom_able copy() {
+		if (this.isEmpty())
+			return null;
+		Polynom_able p = new Polynom();
+		for (Monom monom : ls) {
+			p.add(new Monom(monom));
+		}
+		return p;
+	}
 
-    /**
-     * return a Polynom that represnts the current polynom derivative
-     *
-     * @return Polynom_able
-     */
-    @Override
-    public Polynom_able derivative() {
-        if (this.isEmpty())
-            return null;
-        Polynom_able p = new Polynom();
-        for (Monom monom : ls) {
-            p.add(monom.derive());
-        }
-        return p;
-    }
+	/**
+	 * return a Polynom that represnts the current polynom derivative
+	 *
+	 * @return Polynom_able
+	 */
+	@Override
+	public Polynom_able derivative() {
+		if (this.isEmpty())
+			return null;
+		Polynom_able p = new Polynom();
+		for (Monom monom : ls) {
+			p.add(monom.derive());
+		}
+		return p;
+	}
 
-    /**
-     * @param x0  starting pooint
-     * @param x1  end point
-     * @param eps positive step value
-     * @return
-     */
-    @Override
-    public double area(double x0, double x1, double eps) {
-        double sum = 0;
-        for (double i = x0; i < x1; i += eps) {
-            sum += this.f(i) * eps;
-        }
-        return sum;
-    }
+	/**
+	 * @param x0  starting pooint
+	 * @param x1  end point
+	 * @param eps positive step value
+	 * @return
+	 */
+	@Override
+	public double area(double x0, double x1, double eps) {
+		double sum = 0;
+		for (double i = x0; i < x1; i += eps) {
+			sum += this.f(i) * eps;
+		}
+		return sum;
+	}
 
-    /**
-     * returns the list's iterator
-     *
-     * @return Iterator<Monom>
-     */
-    @Override
-    public Iterator<Monom> iteretor() {
-        Iterator<Monom> m = ls.iterator();
-        return m;
-    }
+	/**
+	 * returns the list's iterator
+	 *
+	 * @return Iterator<Monom>
+	 */
+	@Override
+	public Iterator<Monom> iteretor() {
+		Iterator<Monom> m = ls.iterator();
+		return m;
+	}
 
 	/**
 	 * multplies my in this polynom
@@ -283,5 +301,6 @@ public class Polynom implements Polynom_able {
 		for (Monom m : ls) {
 			m.multipy(m1);
 		}
+		this.eraseZeros();
 	}
 }
