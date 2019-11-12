@@ -11,7 +11,7 @@ import java.util.ArrayList;
 1) -1.0x    	isZero: false	 f(1) = -1.0  <br>
 2) -3.2x^2    	isZero: false	 f(2) = -12.8  <br>
 3) 0    	isZero: true	 f(3) = 0.0  <br>
-*****  Test2:  *****  <br>
+ *****  Test2:  *****  <br>
 0) 0    	isZero: true  	eq: true  <br>
 1) -1.0    	isZero: false  	eq: true  <br>
 2) -1.3x    	isZero: false  	eq: true  <br>
@@ -19,8 +19,9 @@ import java.util.ArrayList;
  */
 public class MonomTest {
 	public static void main(String[] args) {
-		test1();
-		test2();
+		//test1();
+		//test2();
+		test3();
 	}
 	private static void test1() {
 		System.out.println("*****  Test1:  *****");
@@ -48,4 +49,13 @@ public class MonomTest {
 			System.out.println(i+") "+m +"    \tisZero: "+m.isZero()+"  \teq: "+e);
 		}
 	}
+	private static void test3()
+	{
+		Monom m = new Monom("-1");
+		System.out.println(m.toString());
+		m.multipy(m);
+		System.out.println(m.toString());
+
+	}
 }
+

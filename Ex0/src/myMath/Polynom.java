@@ -100,7 +100,7 @@ public class Polynom implements Polynom_able {
 	@Override
 	public void add(Monom m1) { //adding and sorting
 		{
-			if (m1 == null || isEmpty()) throw new RuntimeException("can't compute null");
+			if (m1 == null) throw new RuntimeException("can't compute null");
 			if(ls.isEmpty())
 				ls.add(m1);
 			else
@@ -148,7 +148,7 @@ public class Polynom implements Polynom_able {
             Iterator<Monom> it = p1.iteretor();
             while (it.hasNext()) {
                 Monom monom = (Monom) it.next();
-                this.add(monom);
+                this.add(monom.flip());	
             }
         } else {
             throw new RuntimeException("not polynom instance");
@@ -161,9 +161,16 @@ public class Polynom implements Polynom_able {
 	@Override
 	public void multiply(Polynom_able p1) {
 		if (p1 == null || isEmpty()) throw new RuntimeException("can't compute null");
+		if(this == p1) p1 = this.copy();
+		Polynom_able temp2 = this.copy(),temp3 = this.copy();
+		this.substract(temp2);
 		Iterator<Monom> p1It = p1.iteretor();
 		while (p1It.hasNext())
-			this.multiply(p1It.next());
+		{
+			temp2.multiply(p1It.next());
+			this.add(temp2);
+			temp2 = temp3.copy();
+		}
 	}
 
 	/**
