@@ -124,8 +124,8 @@ public class Monom implements function {
 	}
 
 	public boolean equals(Monom d1) {
-		if (this._power != d1.get_power()) return false;
-		else if (this._coefficient != d1.get_coefficient()) {
+		if (Math.abs(this._power - d1.get_power()) < EPSILON) return false;
+		else if (Math.abs(this._coefficient - d1.get_coefficient()) < EPSILON) {
 			return false;
 		}
 		return true;
