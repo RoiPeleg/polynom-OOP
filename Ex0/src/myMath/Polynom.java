@@ -199,10 +199,21 @@ public class Polynom implements Polynom_able {
 	}
 
 	@Override
-    public double root(double x0, double x1, double eps) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+	public double root(double x0, double x1, double eps) {
+		if (f(x0) * f(x1) > 0) throw new RuntimeException("invalid input");
+		double x = x0 + x1 / 2;
+		double r = x0, l = x1;
+		while (r >= l) {
+			double mid = l + (r - l) / 2;
+			if (Math.abs(this.f(x)) < eps)
+				return this.f(x);
+			if (Math.abs(this.f(x)) > eps)
+				x = x - 1;
+			else
+				x = x + 1;
+		}
+		return 0;
+	}
 
     /**
      * returns new copy of this polynom
@@ -227,7 +238,6 @@ public class Polynom implements Polynom_able {
      */
     @Override
     public Polynom_able derivative() {
-        // TODO Auto-generated method stub
         if (this.isEmpty())
             return null;
         Polynom_able p = new Polynom();
