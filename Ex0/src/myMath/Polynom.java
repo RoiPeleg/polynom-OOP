@@ -69,12 +69,13 @@ public class Polynom implements Polynom_able {
 		return sum;
 	}
 	/**
-	 * adds a monom to the polynom
+	 * adds a polynom to the polynom
 	 *
-	 * @param m1: is a monom to add
+	 * @param p1: is a polynom to add
 	 */
 	@Override
 	public void add(Polynom_able p1) {
+		if (p1 == null || isEmpty()) throw new RuntimeException("can't compute null");
 		if(p1 instanceof Polynom)
 		{
 			if(ls.isEmpty())
@@ -89,7 +90,6 @@ public class Polynom implements Polynom_able {
 		{
 			throw new RuntimeException("not polynom instance");
 		}
-
 	}
 
     /**
@@ -100,6 +100,7 @@ public class Polynom implements Polynom_able {
 	@Override
 	public void add(Monom m1) { //adding and sorting
 		{
+			if (m1 == null || isEmpty()) throw new RuntimeException("can't compute null");
 			if(ls.isEmpty())
 				ls.add(m1);
 			else
@@ -142,9 +143,8 @@ public class Polynom implements Polynom_able {
      */
     @Override
     public void substract(Polynom_able p1) {
-        if (p1 instanceof Polynom) {
-            if (ls.isEmpty())
-                throw new RuntimeException("list empty");
+		if (p1 == null || isEmpty()) throw new RuntimeException("can't compute null");
+		if (p1 instanceof Polynom) {
             Iterator<Monom> it = p1.iteretor();
             while (it.hasNext()) {
                 Monom monom = (Monom) it.next();
@@ -155,18 +155,36 @@ public class Polynom implements Polynom_able {
         }
     }
 
+	/**
+	 * @param p1 - polyom to multply
+	 */
 	@Override
 	public void multiply(Polynom_able p1) {
-		// TODO Auto-generated method stub
-
+		if (p1 == null || isEmpty()) throw new RuntimeException("can't compute null");
+		Iterator<Monom> p1It = p1.iteretor();
+		while (p1It.hasNext())
+			this.multiply(p1It.next());
 	}
 
+	/**
+	 *
+	 * @param p1 - polynom
+	 * @return if this polynom equals p1
+	 */
 	@Override
 	public boolean equals(Polynom_able p1) {
-		// TODO Auto-generated method stub
-		return false;
+		Iterator<Monom> it = p1.iteretor();
+		for (Monom monom : ls) {
+			if (!it.hasNext()) return false;
+			if (!monom.equals(it.next())) return false;
+		}
+		return true;
 	}
 
+	/**
+	 *
+	 * @return true if this polynom is a zero polynom
+	 */
 	@Override
 	public boolean isZero() {
         if (this.equals(new Polynom())) return true;
@@ -186,7 +204,6 @@ public class Polynom implements Polynom_able {
      */
     @Override
     public Polynom_able copy() {
-        // TODO Auto-generated method stub
         if (this.isEmpty())
             return null;
         Polynom_able p = new Polynom();
@@ -239,10 +256,15 @@ public class Polynom implements Polynom_able {
         return m;
     }
 
+	/**
+	 * multplies my in this polynom
+	 * @param m1 - monom to be multiplied
+	 */
 	@Override
 	public void multiply(Monom m1) {
-		// TODO Auto-generated method stub
-
+		if (m1 == null || isEmpty()) throw new RuntimeException("can't compute null");
+		for (Monom m : ls) {
+			m.multipy(m1);
+		}
 	}
-
 }
