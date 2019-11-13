@@ -51,10 +51,16 @@ public class MonomTest {
 	}
 	private static void test3()
 	{
-		Monom m = new Monom("-1");
-		System.out.println(m.toString());
-		m.multipy(m);
-		System.out.println(m.toString());
+		Monom m1 = new Monom("-1");
+		Monom m2 = new Monom("-1");
+		System.out.println(m1.toString());
+		m1.multipy(m1);
+		System.out.println(m1.toString());
+		System.out.println(m1.equals(m2));
+		
+		Monom m3 = new Monom("-x");
+		Monom m4 = new Monom("-x");
+		System.out.println(m3.equals(m4));
 
 	}
 }

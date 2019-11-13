@@ -66,13 +66,26 @@ public class PolynomTest {
 	}
 	
 	public static void test3() {
-		String s = "x^3+1-2x^2";
-		String s1 = "x+1";
+		/*String s = "x^3+1-2x^2";
+		String s1 = "x^3+1-2x^2";
 		Polynom_able p1 = new Polynom(s);
 		Polynom_able p5 = new Polynom(s1);
 		System.out.println(p1);
-		System.out.println(p1.root(1, -0.5, 0.1));
-		System.out.println(p1.root(1, -0.5, 0.0001));
+		System.out.println(p1.root(0, 1.3, 0.1));
+		System.out.println(p1.root(0, 1.3, 0.0001));
+		System.out.println(p1.equals(p5));
+		
+		String s2 = "x^3+1-2x^2";
+		String s3 = "x^3-1-2x^2";
+		
+		Polynom_able p2 = new Polynom(s2);
+		Polynom_able p3 = new Polynom(s3);
+		System.out.println(p2.equals(p3));
+		*/
+		String d = "-x-0";
+		Polynom_able p = new Polynom(d);
+		System.out.println(p);
+		
 		
 	}
 }

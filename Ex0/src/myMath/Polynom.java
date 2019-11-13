@@ -37,18 +37,19 @@ public class Polynom implements Polynom_able {
 		ArrayList<Monom> ls1 = new ArrayList<Monom>();
 		s.toLowerCase();
 		Monom mm;
-		String[] monos = s.split("\\+|\\-");
-		String signs = s.replaceAll("[0-9]", "").replaceAll("\\^", "").replaceAll("x", "").replaceAll("\\.", "");
-		System.out.println(signs);
+		String signs ="";
+		String[] monos = s.split("\\+|\\-",0);
+		if (s.charAt(0) != '-')
+			signs+='+';
+		signs += s.replaceAll("[0-9]", "").replaceAll("\\^", "").replaceAll("x", "").replaceAll("\\.", "");
 		for (int i = 0; i < monos.length; i++) 
 		{
 			mm = new Monom(monos[i]);
 			ls1.add(mm);
 		}
 		int i = 0;
-		if (s.charAt(0) != '-') i++;
 		for (i = 0; i < signs.length(); i++) {
-			if(s.charAt(i) == '-') {
+			if(signs.charAt(i) == '-') {
 				ls1.get(i).multipy(new Monom("-1"));
 			}
 		}
@@ -146,7 +147,9 @@ public class Polynom implements Polynom_able {
 		String str = "";
 		if(ls.isEmpty()) { return "0"; }
 		for (int i = 0; i < ls.size() - 1; i++) {
-			str += ls.get(i).toString() + "+";
+			str += ls.get(i).toString();
+			if(ls.get(i+1).get_coefficient()>=0)
+				str+="+";
 		}
 		str += ls.get(ls.size() - 1).toString();
 		return str;
@@ -219,13 +222,13 @@ public class Polynom implements Polynom_able {
 
 	@Override
 	public double root(double x0, double x1, double eps) {
-		if (f(x0) * f(x1) > 0) throw new RuntimeException("invalid input");
+		if (f(x0) * f(x1) > 0||x0>x1) throw new RuntimeException("invalid input");
 		double x = x0 + x1 / 2;
 		double l = x0, r = x1;
 		if(f(x0)<=f(x1))
 		{
 			while (r >= l) {
-				x = l + (r - l) / 2;
+				x = l + (r-l)/ 2;
 				if (Math.abs(this.f(x)) < eps)
 					return x;
 				if ((this.f(x)) > 0)
@@ -237,10 +240,10 @@ public class Polynom implements Polynom_able {
 		else
 		{
 			while (r >= l) {
-				x = l + (r - l) / 2;
+				x = l + (r-l) / 2;
 				if (Math.abs(this.f(x)) < eps)
 					return x;
-				if ((this.f(x)) < 0)
+				if ((this.f(x)) > 0)
 					l=x;
 				else
 					r=x;
