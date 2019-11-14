@@ -51,8 +51,22 @@ public class Polynom implements Polynom_able {
 			}
 		}
 		ls.sort(Monom.getComp());
-	}
+        this.unify();
+    }
 
+    /**
+     * unifies all monos in lists
+     */
+    private void unify() {
+        for (int i = 0; i < ls.size() - 1; i++) {
+            if (ls.get(i).get_power() == ls.get(i + 1).get_power()) {
+                ls.get(i).add(ls.get(i + 1));
+                Monom flip = ls.get(i + 1).flip();
+                ls.get(i + 1).add(flip);
+            }
+        }
+        eraseZeros();
+    }
 	private void eraseZeros()
 	{
 		for(int i = 0;i<ls.size();i++)
@@ -99,6 +113,7 @@ public class Polynom implements Polynom_able {
 			throw new RuntimeException("not polynom instance");
 		}
 		this.eraseZeros();
+        this.unify();
 	}
 
 	/**
@@ -118,6 +133,8 @@ public class Polynom implements Polynom_able {
 				this.eraseZeros();
 			}
 		}
+        ls.sort(Monom.getComp());
+        this.unify();
 	}
 	public boolean isEmpty()
 	{
@@ -153,7 +170,7 @@ public class Polynom implements Polynom_able {
 		} else {
 			throw new RuntimeException("not polynom instance");
 		}
-
+        this.unify();
 	}
 
 	/**
@@ -173,6 +190,8 @@ public class Polynom implements Polynom_able {
 			temp2 = temp3.copy();
 		}
 		this.eraseZeros();
+        ls.sort(Monom.getComp());
+        this.unify();
 	}
 
 	/**
