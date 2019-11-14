@@ -55,7 +55,43 @@ public class MonomTest {
 		System.out.println(m.toString());
 		m.multipy(m);
 		System.out.println(m.toString());
-
+		Monom m2 = new Monom("4");
+		Monom m3 = new Monom("4");
+		m2.add(m3);
+		System.out.println(m2);
+		m2.multipy(m3);
+		System.out.println(m2);
+		m2 = new Monom("4x");
+		m3 = new Monom("5x");
+		m2.add(m3);
+		System.out.println(m2);
+		m2.multipy(m3);
+		System.out.println(m2);
+		m2 = new Monom("4x^3");
+		m3 = new Monom("5x^3");
+		m2.add(m3);
+		System.out.println(m2);
+		m2.multipy(m3);
+		System.out.println(m2);
+		try {
+			m.add(m2);
+			System.out.println("should'nt print");
+		} catch (Exception e) {
+			System.out.println("add ok");
+		}
+		Monom n = null;
+		try {
+			m.add(n);
+			System.out.println("should'nt print");
+		} catch (Exception e) {
+			System.out.println("null add ok");
+		}
+		try {
+			m.multipy(n);
+			System.out.println("should'nt print");
+		} catch (Exception e) {
+			System.out.println("null multiply ok");
+		}
 	}
 }
 

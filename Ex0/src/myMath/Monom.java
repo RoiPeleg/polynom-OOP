@@ -2,10 +2,6 @@ package myMath;
 
 import java.util.Comparator;
 
-import org.graalvm.compiler.nodes.java.NewMultiArrayNode;
-
-import com.sun.org.apache.bcel.internal.generic.RETURN;
-
 /**
  * This class represents a simple "Monom" of shape a*x^b, where a is a real number and a is an integer (summed a none negative),
  * see: https://en.wikipedia.org/wiki/Monomial
@@ -100,6 +96,8 @@ public class Monom implements function {
 	}
 
 	public void add(Monom m) {
+		if (m == null) throw new RuntimeException("can't handle null");
+
 		if (this._power == m._power) {
 			this._coefficient += m._coefficient;
 		} else
@@ -107,6 +105,7 @@ public class Monom implements function {
 	}
 
 	public void multipy(Monom d) {
+		if (d == null) throw new RuntimeException("can't handle null");
 		this._coefficient = this._coefficient * d._coefficient;
 		this._power += d._power;
 	}
