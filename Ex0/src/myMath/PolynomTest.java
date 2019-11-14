@@ -5,7 +5,8 @@ public class PolynomTest {
 	public static void main(String[] args) {
 		//test1();
 		//test2();
-		test3();
+		//test3();
+		athmeticTest();
 	}
 	public static void test1() {
 		Polynom_able p1 = new Polynom();
@@ -73,6 +74,38 @@ public class PolynomTest {
 		System.out.println(p1);
 		System.out.println(p1.root(1, -0.5, 0.1));
 		System.out.println(p1.root(1, -0.5, 0.0001));
-		
+	}
+
+	public static void athmeticTest() {
+		String s = "x^3+1-2x^2";
+		String s1 = "x+1";
+		Polynom_able p1 = new Polynom(s);
+		Polynom_able p5 = new Polynom(s1);
+		System.out.println(p1);
+		System.out.println(p5);
+		Polynom_able n = null;
+		try {
+			p1.add(n);
+		} catch (Exception e) {
+			System.out.println("Null pass add");
+		}
+		try {
+			p1.multiply(n);
+		} catch (Exception e) {
+			System.out.println("Null pass multiply");
+		}
+		try {
+			p1.substract(n);
+		} catch (Exception e) {
+			System.out.println("Null pass substract");
+		}
+		p1.multiply(p5);
+		System.out.println(p1);
+		p1 = new Polynom(s);
+		p1.substract(p5);
+		System.out.println(p1);
+		p1 = new Polynom(s);
+		p1.add(p5);
+		System.out.println(p1);
 	}
 }

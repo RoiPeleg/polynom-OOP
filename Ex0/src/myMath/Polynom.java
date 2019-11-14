@@ -2,11 +2,6 @@ package myMath;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.function.Predicate;
-
-import javax.management.RuntimeErrorException;
-
-import myMath.Monom;
 
 /**
  * This class represents a Polynom with add, multiply functionality, it also should support the following:
@@ -35,27 +30,27 @@ public class Polynom implements Polynom_able {
 	public Polynom(String s) {
 		this();
 		ArrayList<Monom> ls1 = new ArrayList<Monom>();
+		boolean firstC = false;
+		Monom neg = new Monom("-1");
 		s.toLowerCase();
+		if (s.charAt(0) != '-') firstC = true;
 		Monom mm;
 		String[] monos = s.split("\\+|\\-");
 		String signs = s.replaceAll("[0-9]", "").replaceAll("\\^", "").replaceAll("x", "").replaceAll("\\.", "");
-		System.out.println(signs);
-		for (int i = 0; i < monos.length; i++) 
+		for (int i = 0; i < monos.length; i++)
 		{
 			mm = new Monom(monos[i]);
-			ls1.add(mm);
+			ls.add(mm);
 		}
-		int i = 0;
-		if (s.charAt(0) != '-') i++;
-		for (i = 0; i < signs.length(); i++) {
-			if(s.charAt(i) == '-') {
-				ls1.get(i).multipy(new Monom("-1"));
+		if (firstC) {
+			signs = "+" + signs;
+		}
+		for (int i = 0; i < signs.length(); i++) {
+			if (signs.charAt(i) == '-') {
+				ls.get(i).multipy(neg);
 			}
 		}
-		for(i=0;i<ls1.size();i++)
-		{
-			add(ls1.get(i));
-		}
+		ls.sort(Monom.getComp());
 	}
 
 	private void eraseZeros()
@@ -119,23 +114,11 @@ public class Polynom implements Polynom_able {
 				ls.add(m1);
 			else
 			{
-				int c = 0;
-				for(int i = 0;i<ls.size() && ls.get(i).get_power()<m1.get_power();i++)
-					c++;
-				if(c==ls.size())
-					ls.add(m1);
-				else
-				{
-					if(ls.get(c).get_power()==m1.get_power())
-						ls.get(c).add(m1);	
-					else
-						ls.add(c, m1);
-				}
+				ls.add(m1);
 				this.eraseZeros();
 			}
 		}
 	}
-
 	public boolean isEmpty()
 	{
 		return ls.size()==0;
