@@ -78,7 +78,7 @@ public class PolynomTest {
 
 	public static void athmeticTest() {
 		String s = "x^3+1-2x^2";
-		String s1 = "x+1";
+		String s1 = "x-1";
 		Polynom_able p1 = new Polynom(s);
 		Polynom_able p5 = new Polynom(s1);
 		System.out.println(p1);

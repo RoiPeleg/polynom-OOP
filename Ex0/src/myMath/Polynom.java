@@ -35,8 +35,9 @@ public class Polynom implements Polynom_able {
 		s.toLowerCase();
 		if (s.charAt(0) != '-') firstC = true;
 		Monom mm;
-		String[] monos = s.split("\\+|\\-");
 		String signs = s.replaceAll("[0-9]", "").replaceAll("\\^", "").replaceAll("x", "").replaceAll("\\.", "");
+		if (s.charAt(0) == '-') s = s.substring(1);
+		String[] monos = s.split("\\+|\\-");
 		for (int i = 0; i < monos.length; i++)
 		{
 			mm = new Monom(monos[i]);
@@ -146,7 +147,10 @@ public class Polynom implements Polynom_able {
 		String str = "";
 		if(ls.isEmpty()) { return "0"; }
 		for (int i = 0; i < ls.size() - 1; i++) {
-			str += ls.get(i).toString() + "+";
+			str += ls.get(i).toString();
+			if (ls.get(i + 1).get_coefficient() > 0) {
+				str += "+";
+			}
 		}
 		str += ls.get(ls.size() - 1).toString();
 		return str;
