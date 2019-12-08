@@ -204,13 +204,17 @@ public class Polynom implements Polynom_able {
 	 * @return if this polynom equals p1
 	 */
 	@Override
-	public boolean equals(Polynom_able p1) {
-		Iterator<Monom> it = p1.iteretor();
-		for (Monom monom : ls) {
-			if (!it.hasNext()) return false;
-			if (!monom.equals(it.next())) return false;
+	public boolean equals(Object p1) {
+		if (p1 instanceof Polynom_able) {
+			Polynom_able p = (Polynom_able) p1;
+			Iterator<Monom> it = p.iteretor();
+			for (Monom monom : ls) {
+				if (!it.hasNext()) return false;
+				if (!monom.equals(it.next())) return false;
+			}
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	/**
