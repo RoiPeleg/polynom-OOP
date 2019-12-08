@@ -156,6 +156,11 @@ public class Polynom implements Polynom_able {
 		return str;
 	}
 
+	@Override
+	public function initFromString(String s) {
+		return null;
+	}
+
 	/**
 	 * subtracts a polynom from current one
 	 *
@@ -191,7 +196,7 @@ public class Polynom implements Polynom_able {
 		{
 			temp2.multiply(p1It.next());
 			this.add(temp2);
-			temp2 = temp3.copy();
+			temp2 = (Polynom_able) temp3.copy();
 		}
 		this.eraseZeros();
         ls.sort(Monom.getComp());
