@@ -48,7 +48,7 @@ public class ComplexFunction implements cont_function {
 
 	@Override
 	public double root(double x0, double x1, double eps) {
-		return 0;//TODO
+		return 0;
 	}
 
 	@Override
@@ -145,7 +145,7 @@ public class ComplexFunction implements cont_function {
 			s = "min";
 			break;
 		case None:
-			s = "None";
+			s = "none";
 			break;
 		default:
 			throw new RuntimeException("not valid expression");

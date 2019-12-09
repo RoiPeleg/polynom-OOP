@@ -80,12 +80,14 @@ class Functions_GUITest {
         Polynom p3 = new Polynom(s3[0]);
         ComplexFunction cf3 = new ComplexFunction(p3);
         for (int i = 1; i < s3.length; i++) {
+            System.out.println(s3[i]);
             cf3.mul(new Polynom(s3[i]));
         }
 
         ComplexFunction cf = new ComplexFunction("plus", p1, p2);
         ComplexFunction cf4 = new ComplexFunction("div", new Polynom("x +1"), cf3);
         cf4.plus(new Monom("2"));
+        System.out.println();
         ans.add(cf.copy());
         ans.add(cf4.copy());
         cf.div(p1);
