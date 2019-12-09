@@ -23,7 +23,7 @@ public class ComplexFunction implements cont_function {
             case "none":
                 op = Operation.None;
             case "error":
-                op = Operation.Error;
+                throw new RuntimeException("undfiened opertion");
             default:
                 throw new RuntimeException("undfiened opertion");
         }

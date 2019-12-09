@@ -1,10 +1,12 @@
 package myMath;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
 public class Functions_GUI implements functions {
+    private ArrayList<function> ls;
     @Override
     public void initFromFile(String file) throws IOException {
 
@@ -27,66 +29,66 @@ public class Functions_GUI implements functions {
 
     @Override
     public int size() {
-        return 0;
+        return ls.size();
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return ls.isEmpty();
     }
 
     @Override
     public boolean contains(Object o) {
-        return false;
+        return ls.contains(o);
     }
 
     @Override
     public Iterator<function> iterator() {
-        return null;
+        return ls.iterator();
     }
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return ls.toArray();
     }
 
     @Override
     public <T> T[] toArray(T[] a) {
-        return null;
+        return ls.toArray(a);
     }
 
     @Override
     public boolean add(function function) {
-        return false;
+        return ls.add(function);
     }
 
     @Override
     public boolean remove(Object o) {
-        return false;
+        return ls.remove(o);
     }
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        return ls.containsAll(c);
     }
 
     @Override
     public boolean addAll(Collection<? extends function> c) {
-        return false;
+        return ls.addAll(c);
     }
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
+        return ls.removeAll(c);
     }
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return false;
+        return ls.removeAll(c);
     }
 
     @Override
     public void clear() {
-
+        ls.clear();
     }
 }
