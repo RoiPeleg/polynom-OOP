@@ -8,22 +8,21 @@ import java.util.Iterator;
 public class Functions_GUI implements functions {
     private ArrayList<function> ls;
     @Override
-    public void initFromFile(String file) throws IOException {
+    public void initFromFile(String file) throws IOException {//TODO
+    }
+
+    @Override
+    public void saveToFile(String file) throws IOException {//TODO
 
     }
 
     @Override
-    public void saveToFile(String file) throws IOException {
+    public void drawFunctions(int width, int height, Range rx, Range ry, int resolution) {//TODO
 
     }
 
     @Override
-    public void drawFunctions(int width, int height, Range rx, Range ry, int resolution) {
-
-    }
-
-    @Override
-    public void drawFunctions(String json_file) {
+    public void drawFunctions(String json_file) {//TODO
 
     }
 

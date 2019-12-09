@@ -4,6 +4,25 @@
 # Log file
 *.log
 
+#eclipse
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+# File-based project format
+*.iws
+
+*.iml
+/.project
+/.settings
+
 # BlueJ files
 *.ctxt
 

@@ -36,12 +36,12 @@ public class ComplexFunction implements cont_function {
 
     @Override
     public double area(double x0, double x1, double eps) {
-        return 0;
+        return 0;//TODO
     }
 
     @Override
     public double root(double x0, double x1, double eps) {
-        return 0;
+        return 0;//TODO
     }
 
     @Override
@@ -54,7 +54,7 @@ public class ComplexFunction implements cont_function {
             case Times:
                 return left.f(x) * right.f(x);
             case Comp:
-                return 0;//TODO - COMPSTION
+                return left.f(right.f(x));
             case Max:
                 return Math.max(left.f(x), right.f(x));
             case Min:
@@ -67,7 +67,7 @@ public class ComplexFunction implements cont_function {
 
     @Override
     public function initFromString(String s) {
-        return null;
+        return null;//TODO
     }
 
     @Override
