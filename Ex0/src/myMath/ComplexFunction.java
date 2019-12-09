@@ -72,7 +72,32 @@ public class ComplexFunction implements cont_function {
 
     @Override
     public function copy() {
-        return null;
+        String s = "";
+        switch (this.op) {
+            case Plus:
+                s = "plus";
+                break;
+            case Divid:
+                s = "div";
+                break;
+            case Times:
+                s = "mul";
+                break;
+            case Comp:
+                s = "comp";
+                break;
+            case Max:
+                s = "max";
+                break;
+            case Min:
+                s = "min";
+                break;
+            case None:
+                s = "None";
+                break;
+        }
+        function f = new ComplexFunction(s, this.left, this.right);
+        return f;
     }
 
     public void max(function f) {
