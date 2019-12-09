@@ -33,7 +33,18 @@ public class Polynom implements Polynom_able {
 		boolean firstC = false;
 		Monom neg = new Monom("-1");
 		s.toLowerCase();
-		if (s.charAt(0) != '-') firstC = true;
+		if(s.length()==0)
+			throw new RuntimeException("not valid Polynom");
+
+		if (s.charAt(0) == '+') 
+		{
+			s = s.substring(1);	
+		}
+
+		if (s.charAt(0) != '-')
+		{
+			firstC = true;
+		}
 		Monom mm;
 		String signs = s.replaceAll("[0-9]", "").replaceAll("\\^", "").replaceAll("x", "").replaceAll("\\.", "");
 		if (s.charAt(0) == '-') s = s.substring(1);
@@ -52,22 +63,22 @@ public class Polynom implements Polynom_able {
 			}
 		}
 		ls.sort(Monom.getComp());
-        this.unify();
-    }
+		this.unify();
+	}
 
-    /**
-     * unifies all monos in lists
-     */
-    private void unify() {
-        for (int i = 0; i < ls.size() - 1; i++) {
-            if (ls.get(i).get_power() == ls.get(i + 1).get_power()) {
-                ls.get(i).add(ls.get(i + 1));
-                Monom flip = ls.get(i + 1).flip();
-                ls.get(i + 1).add(flip);
-            }
-        }
-        eraseZeros();
-    }
+	/**
+	 * unifies all monos in lists
+	 */
+	private void unify() {
+		for (int i = 0; i < ls.size() - 1; i++) {
+			if (ls.get(i).get_power() == ls.get(i + 1).get_power()) {
+				ls.get(i).add(ls.get(i + 1));
+				Monom flip = ls.get(i + 1).flip();
+				ls.get(i + 1).add(flip);
+			}
+		}
+		eraseZeros();
+	}
 	private void eraseZeros()
 	{
 		for(int i = 0;i<ls.size();i++)
@@ -114,7 +125,7 @@ public class Polynom implements Polynom_able {
 			throw new RuntimeException("not polynom instance");
 		}
 		this.eraseZeros();
-        this.unify();
+		this.unify();
 	}
 
 	/**
@@ -134,8 +145,8 @@ public class Polynom implements Polynom_able {
 				this.eraseZeros();
 			}
 		}
-        ls.sort(Monom.getComp());
-        this.unify();
+		ls.sort(Monom.getComp());
+		this.unify();
 	}
 	public boolean isEmpty()
 	{
@@ -158,7 +169,8 @@ public class Polynom implements Polynom_able {
 
 	@Override
 	public function initFromString(String s) {
-		return null;
+		function p1 = new Polynom(s);
+		return p1;
 	}
 
 	/**
@@ -179,7 +191,7 @@ public class Polynom implements Polynom_able {
 		} else {
 			throw new RuntimeException("not polynom instance");
 		}
-        this.unify();
+		this.unify();
 	}
 
 	/**
@@ -199,8 +211,8 @@ public class Polynom implements Polynom_able {
 			temp2 = (Polynom_able) temp3.copy();
 		}
 		this.eraseZeros();
-        ls.sort(Monom.getComp());
-        this.unify();
+		ls.sort(Monom.getComp());
+		this.unify();
 	}
 
 	/**

@@ -61,6 +61,8 @@ public class Monom implements function {
 
 	// ***************** add your code below **********************
 	public Monom(String s) {
+		if(s.length()==0)
+			throw new RuntimeException("empty monum");
 		s = s.toLowerCase();
 		if (s.contains("x")) {
 			if (s.contains("-") && s.length() == 2) {
@@ -176,4 +178,16 @@ public class Monom implements function {
 
 	private double _coefficient;
 	private int _power;
+
+	@Override
+	public function initFromString(String s) {
+		function p1 = new Monom(s);
+		return p1;
+	}
+
+	@Override
+	public function copy() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
