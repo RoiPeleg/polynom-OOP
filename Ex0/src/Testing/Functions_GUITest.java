@@ -10,6 +10,8 @@ import myMath.Polynom;
 import myMath.Range;
 import myMath.function;
 
+import java.util.Iterator;
+
 /**
  * Partial JUnit + main test for the GUI_Functions class, expected output from the main:
  * 0) java.awt.Color[r=0,g=0,b=255]  f(x)= plus(-1.0x^4 +2.4x^2 +3.1,+0.1x^5 -1.2999999999999998x +5.0)
@@ -93,11 +95,12 @@ class Functions_GUITest {
         function cf6 = cf4.initFromString(s2);
         ans.add(cf5.copy());
         ans.add(cf6.copy());
-        ComplexFunction max = new ComplexFunction(ans.get(0).copy());
-        ComplexFunction min = new ComplexFunction(ans.get(0).copy());
-        for (int i = 1; i < ans.size(); i++) {
-            max.max(ans.get(i));
-            min.min(ans.get(i));
+        Iterator<function> it = ans.iterator();
+        ComplexFunction max = new ComplexFunction(it.next().copy());
+        ComplexFunction min = new ComplexFunction(it.next().copy());
+        while (it.hasNext()) {
+            max.max(it.next());
+            min.min(it.next());
         }
         ans.add(max);
         ans.add(min);
