@@ -102,10 +102,15 @@ public class ComplexFunction implements complex_function {
     @Override
     public function initFromString(String s) {
         s = s.replaceAll(" ", "");
-        if (s.substring(0, 5).compareTo("f(x)=") != 0) {
-            stringbuild(s.substring(5));
+        if (s.substring(0, 5).compareTo("f(x)=") == 0) {
+            return stringbuild(s.substring(5));
         }
-        return stringbuild(s.substring(5));
+        int start = s.indexOf('(');
+        String opi = s.substring(0, start);
+        if (opi.equals("plus") || opi.equals("div") || opi.equals("mul") || opi.equals("comp") || opi.equals("max") || opi.equals("min") || opi.equals("none")) {
+            return stringbuild(s);
+        }
+        throw new RuntimeException("not valid expression");
     }
 
     private static function stringbuild(String s) {
@@ -264,11 +269,4 @@ public class ComplexFunction implements complex_function {
         return s;
     }
 
-
-    public static void main(String[] args) {
-        String s = "f(x)= plus(div(+1.0x +1.0,mul(mul(+1.0x +3.0,+1.0x -2.0),+1.0x -4.0)),2.0)";
-        ComplexFunction c = new ComplexFunction(new Polynom("x"));
-        function d = c.initFromString(s);
-        System.out.println(d.toString());
-    }
 }
