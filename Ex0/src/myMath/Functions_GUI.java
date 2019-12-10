@@ -1,11 +1,10 @@
 package myMath;
 
 import java.awt.*;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Random;
+import java.util.*;
 
 public class Functions_GUI implements functions {
     private ArrayList<function> ls;
@@ -15,11 +14,22 @@ public class Functions_GUI implements functions {
     }
     @Override
     public void initFromFile(String file) throws IOException {//TODO
+        File fl =
+                new File("File");
+        Scanner sc = new Scanner(fl);
+        if (ls != null) ls = new ArrayList<function>();
+        ComplexFunction cf = new ComplexFunction(new Polynom("2"));
+        while (sc.hasNextLine())
+            ls.add(cf.initFromString(sc.nextLine()));
+
     }
 
     @Override
-    public void saveToFile(String file) throws IOException {//TODO
-
+    public void saveToFile(String file) throws IOException {
+        FileWriter fileWriter = new FileWriter(file, true);
+        Iterator<function> it = ls.iterator();
+        while (it.hasNext())
+            fileWriter.append(it.toString());
     }
 
     @Override
@@ -48,6 +58,7 @@ public class Functions_GUI implements functions {
             b = rand.nextFloat();
             Color randomColor = new Color(r, g, b);
             StdDraw.setPenColor(randomColor);
+            StdDraw.setPenRadius(0.005);
             double[] x = new double[resolution + 1];
             double[] y = new double[resolution + 1];
             double jump = (rx.get_max() - rx.get_min()) / resolution;

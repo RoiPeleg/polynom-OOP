@@ -233,12 +233,12 @@ public class ComplexFunction implements cont_function {
 	public String toString() {
 		String str = "";
 		str = toString(str);
-		sysyo
 		return str;
 	} 
 	
 	private String toString(String s) {
 		String str = "";
+		/*
 		if(ls.isEmpty()) { return "0"; }
 		for (int i = 0; i < ls.size() - 1; i++) {
 			str += ls.get(i).toString();
@@ -247,6 +247,8 @@ public class ComplexFunction implements cont_function {
 			}
 		}
 		str += ls.get(ls.size() - 1).toString();
+		return str;
+		*/
 		return str;
 	} 
 }
