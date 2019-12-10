@@ -42,13 +42,46 @@ public class ComplexFunction implements cont_function {
 	}
 
 	@Override
-	public double area(double x0, double x1, double eps) {
-		return 0;//TODO
+	public double area(double x0, double x1, double eps)
+	{
+		double sum = 0;
+		for (double i = x0; i < x1; i += eps) {
+			sum += this.f(i) * eps;
+		}
+		return sum;
 	}
 
 	@Override
 	public double root(double x0, double x1, double eps) {
-		return 0;
+		if (f(x0) * f(x1) > 0) throw new RuntimeException("invalid input");
+		double x = x0 + x1 / 2;
+		double l = x0, r = x1;
+		if(f(x0)<=f(x1))
+		{
+			while (r >= l) {
+				x = l + (r - l) / 2;
+				if (Math.abs(this.f(x)) < eps)
+					return x;
+				if ((this.f(x)) > 0)
+					r=x;
+				else
+					l=x;
+			}
+		}
+		else
+		{
+			while (r >= l) {
+				x = l + (r - l) / 2;
+				if (Math.abs(this.f(x)) < eps)
+					return x;
+				if ((this.f(x)) < 0)
+					l=x;
+				else
+					r=x;
+			}
+		}
+		return -1;
+
 	}
 
 	@Override
@@ -195,5 +228,26 @@ public class ComplexFunction implements cont_function {
 		this.right = f;
 		this.op = Operation.Comp;
 	}
+	
+	@Override
+	public String toString() {
+		String str = "";
+		str = toString(str);
+		sysyo
+		return str;
+	} 
+	
+	private String toString(String s) {
+		String str = "";
+		if(ls.isEmpty()) { return "0"; }
+		for (int i = 0; i < ls.size() - 1; i++) {
+			str += ls.get(i).toString();
+			if (ls.get(i + 1).get_coefficient() > 0) {
+				str += "+";
+			}
+		}
+		str += ls.get(ls.size() - 1).toString();
+		return str;
+	} 
 }
 
