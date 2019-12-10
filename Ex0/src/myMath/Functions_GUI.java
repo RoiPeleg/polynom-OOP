@@ -15,21 +15,29 @@ public class Functions_GUI implements functions {
     @Override
     public void initFromFile(String file) throws IOException {//TODO
         File fl =
-                new File("File");
+                new File(file);
         Scanner sc = new Scanner(fl);
         if (ls != null) ls = new ArrayList<function>();
         ComplexFunction cf = new ComplexFunction(new Polynom("2"));
-        while (sc.hasNextLine())
-            ls.add(cf.initFromString(sc.nextLine()));
-
+        while (sc.hasNextLine()) {
+            String a = sc.nextLine();
+            System.out.println(a);
+            ls.add(cf.initFromString(a));
+        }
     }
 
     @Override
     public void saveToFile(String file) throws IOException {
-        FileWriter fileWriter = new FileWriter(file, true);
+        File file1 = new File(file);
+        if (file1.exists()) throw new RuntimeException("file aleardy exists");
+        FileWriter fileWriter = new FileWriter(file1, true);
         Iterator<function> it = ls.iterator();
-        while (it.hasNext())
-            fileWriter.append(it.toString());
+        while (it.hasNext()) {
+            String a = it.next().toString();
+            System.out.println(a);
+            fileWriter.write(a + "\n");
+            fileWriter.close();
+        }
     }
 
     @Override
@@ -139,5 +147,14 @@ public class Functions_GUI implements functions {
     @Override
     public void clear() {
         ls.clear();
+    }
+
+    public static void main(String args[]) throws Exception {
+        Functions_GUI fg = new Functions_GUI();
+        fg.add(new ComplexFunction("plus", new Polynom("x^2"), (new Polynom("x^2"))));
+        fg.saveToFile("data.txt");
+        Functions_GUI ff = new Functions_GUI();
+        ff.initFromFile("data.txt");
+        System.out.println(ff.toString());
     }
 }
