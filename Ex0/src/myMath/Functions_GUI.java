@@ -25,21 +25,36 @@ public class Functions_GUI implements functions {
     @Override
     public void drawFunctions(int width, int height, Range rx, Range ry, int resolution) {
         Random rand = new Random();
+        float r, g, b;
         StdDraw.setCanvasSize(width, height);
-        for (function f : ls) {
-            float r = rand.nextFloat();
-            float g = rand.nextFloat();
-            float b = rand.nextFloat();
+        StdDraw.setXscale(rx.get_min(), rx.get_max());
+        StdDraw.setYscale(ry.get_min(), ry.get_max());
+        StdDraw.setPenColor(Color.black);
+        StdDraw.line(rx.get_min(), 0, rx.get_max(), 0);
+        StdDraw.line(0, ry.get_min(), 0, ry.get_max());
+        StdDraw.setPenColor(Color.LIGHT_GRAY);
+        for (double i = rx.get_min(); i <= rx.get_max(); i = i + 10) {
+            //StdDraw.line(i, ry.get_min(), i, ry.get_max());
+        }
+        for (double i = ry.get_min(); i <= ry.get_max(); i = i + 0.5) {//horizontal
+            // StdDraw.line(rx.get_min(), i, rx.get_max(), i);
+        }
+        Iterator<function> it = ls.iterator();
+        function f;
+        while (it.hasNext()) {
+            f = it.next();
+            r = rand.nextFloat();
+            g = rand.nextFloat();
+            b = rand.nextFloat();
             Color randomColor = new Color(r, g, b);
             StdDraw.setPenColor(randomColor);
             double[] x = new double[resolution + 1];
             double[] y = new double[resolution + 1];
+            double jump = (rx.get_max() - rx.get_min()) / resolution;
             for (int i = 0; i <= resolution; i++) {
-                x[i] = i;
-                y[i] = f.f(i);
+                x[i] = i * jump + rx.get_min();
+                y[i] = f.f(x[i]);
             }
-            StdDraw.setXscale(rx.get_min(), rx.get_max());
-            StdDraw.setYscale(ry.get_min(), ry.get_max());
             for (int i = 0; i < resolution; i++) {
                 StdDraw.line(x[i], y[i], x[i + 1], y[i + 1]);
             }
