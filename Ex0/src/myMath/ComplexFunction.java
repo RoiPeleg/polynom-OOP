@@ -1,6 +1,6 @@
 package myMath;
 
-public class ComplexFunction implements cont_function {
+public class ComplexFunction implements complex_function {
     private function right, left;
     private Operation op;
 
@@ -41,7 +41,6 @@ public class ComplexFunction implements cont_function {
         this.op = Operation.None;
     }
 
-    @Override
     public double area(double x0, double x1, double eps) {
         double sum = 0;
         for (double i = x0; i < x1; i += eps) {
@@ -50,7 +49,6 @@ public class ComplexFunction implements cont_function {
         return sum;
     }
 
-    @Override
     public double root(double x0, double x1, double eps) {
         if (f(x0) * f(x1) > 0) throw new RuntimeException("invalid input");
         double x = x0 + x1 / 2;
@@ -219,6 +217,21 @@ public class ComplexFunction implements cont_function {
     }
 
     @Override
+    public function left() {
+        return this.left;
+    }
+
+    @Override
+    public function right() {
+        return this.right;
+    }
+
+    @Override
+    public Operation getOp() {
+        return this.op;
+    }
+
+    @Override
     public String toString() {
         String s = "";
         switch (this.op) {
@@ -256,7 +269,5 @@ public class ComplexFunction implements cont_function {
         ComplexFunction c = new ComplexFunction(new Polynom("x"));
         function d = c.initFromString(s);
         System.out.println(d.toString());
-
-
     }
 }
