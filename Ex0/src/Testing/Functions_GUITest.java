@@ -80,7 +80,6 @@ class Functions_GUITest {
         Polynom p3 = new Polynom(s3[0]);
         ComplexFunction cf3 = new ComplexFunction(p3);
         for (int i = 1; i < s3.length; i++) {
-            System.out.println(s3[i]);
             cf3.mul(new Polynom(s3[i]));
         }
 
@@ -100,9 +99,11 @@ class Functions_GUITest {
         Iterator<function> it = ans.iterator();
         ComplexFunction max = new ComplexFunction(it.next().copy());
         ComplexFunction min = new ComplexFunction(it.next().copy());
+        function f1;
         while (it.hasNext()) {
-            max.max(it.next());
-            min.min(it.next());
+            f1 = it.next();
+            max.max(f1);
+            min.min(f1);
         }
         ans.add(max);
         ans.add(min);
