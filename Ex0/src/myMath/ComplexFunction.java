@@ -77,7 +77,7 @@ public class ComplexFunction implements cont_function {
 		s = s.replaceAll(" ", "");
 		if(s.substring(0,5).compareTo("f(x)=")!=0)
 		{
-			throw new RuntimeException("wrong syntax, must be written as f(x)=...");
+			stringbuild(s.substring(5));
 		}
 		return stringbuild(s.substring(5));
 	}

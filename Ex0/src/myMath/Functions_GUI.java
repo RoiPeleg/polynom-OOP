@@ -9,6 +9,10 @@ import java.util.Random;
 
 public class Functions_GUI implements functions {
     private ArrayList<function> ls;
+
+    public Functions_GUI() {
+        ls = new ArrayList<function>();
+    }
     @Override
     public void initFromFile(String file) throws IOException {//TODO
     }
