@@ -7,12 +7,14 @@ import com.google.gson.JsonObject;
 import java.awt.*;
 import java.io.*;
 import java.util.*;
+
 public class Functions_GUI implements functions {
     private ArrayList<function> ls;
 
     public Functions_GUI() {
         ls = new ArrayList<function>();
     }
+
     @Override
     public void initFromFile(String file) throws IOException {
         File fl = new File(file);
@@ -168,10 +170,10 @@ public class Functions_GUI implements functions {
     public void clear() {
         ls.clear();
     }
-public String toString()
-{
-    return ls.toString();
-}
+
+    public String toString() {
+        return ls.toString();
+    }
 
     public static void main(String[] args) {
         Functions_GUI f = new Functions_GUI();

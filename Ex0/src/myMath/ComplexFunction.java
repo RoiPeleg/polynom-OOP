@@ -269,4 +269,9 @@ public class ComplexFunction implements complex_function {
         return s;
     }
 
+    public boolean equals(function f, int min, int max) {
+        for (int i = 0; i < max; i++)
+            if (this.f(i) != f.f(i)) return false;
+        return true;
+    }
 }
