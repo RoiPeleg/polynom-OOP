@@ -39,6 +39,7 @@ class Functions_GUITest {
     }
 
     private Functions_GUI _data = null;
+    private Functions_GUI fg;
 //	@BeforeAll
 //	static void setUpBeforeClass() throws Exception {
 //	}
@@ -55,22 +56,22 @@ class Functions_GUITest {
 
     //@Test
     void testInitFromFile() {
-        Functions_GUI fg = new Functions_GUI();
+        fg = new Functions_GUI();
         try {
             fg.initFromFile("data.txt");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        fg.toString();
     }
 
-    //@Test
+    @Test
     void testSaveToFile() {
         try {
             _data.saveToFile("data.txt");
         } catch (Exception e) {
             e.printStackTrace();
         }
+        assert (_data.toString().equals(fg.toString()));
     }
 
     //@Test
