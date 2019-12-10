@@ -34,7 +34,6 @@ public class Functions_GUI implements functions {
         Iterator<function> it = ls.iterator();
         while (it.hasNext()) {
             String a = it.next().toString();
-            System.out.println(a);
             fileWriter.write(a + "\n");
             fileWriter.close();
         }
@@ -148,13 +147,8 @@ public class Functions_GUI implements functions {
     public void clear() {
         ls.clear();
     }
-
-    public static void main(String args[]) throws Exception {
-        Functions_GUI fg = new Functions_GUI();
-        fg.add(new ComplexFunction("plus", new Polynom("x^2"), (new Polynom("x^2"))));
-        fg.saveToFile("data.txt");
-        Functions_GUI ff = new Functions_GUI();
-        ff.initFromFile("data.txt");
-        System.out.println(ff.toString());
-    }
+public String toString()
+{
+    return ls.toString();
+}
 }

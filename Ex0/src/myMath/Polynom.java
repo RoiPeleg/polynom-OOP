@@ -170,7 +170,6 @@ public class Polynom implements Polynom_able {
 
 	@Override
 	public function initFromString(String s) {
-		System.out.println("poly" + s);
 		function p1 = new Polynom(s);
 		return p1;
 	}
