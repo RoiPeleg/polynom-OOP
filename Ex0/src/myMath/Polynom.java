@@ -112,13 +112,14 @@ public class Polynom implements Polynom_able {
 	 */
 	@Override
 	public void add(Polynom_able p1) {
-		if (p1 == null) throw new RuntimeException("can't compute null");
+		if (p1 == null) return;
+		if(this == p1) p1 = this.copy();
 		if(p1 instanceof Polynom)
 		{
 			Iterator<Monom> it = p1.iteretor();
 			while (it.hasNext()) {
 				Monom monom = (Monom) it.next();
-				this.add(monom);			
+				this.add(monom);
 			}
 		}
 		else
@@ -142,7 +143,7 @@ public class Polynom implements Polynom_able {
 				ls.add(m1);
 			else
 			{
-				ls.add(m1);
+				ls.add(new Monom(m1));
 				this.eraseZeros();
 			}
 		}
@@ -153,7 +154,6 @@ public class Polynom implements Polynom_able {
 	{
 		return ls.size()==0;
 	}
-
 	@Override
 	public String toString() {
 		String str = "";
@@ -181,12 +181,13 @@ public class Polynom implements Polynom_able {
 	 */
 	@Override
 	public void substract(Polynom_able p1) {
-		if (p1 == null || isEmpty()) throw new RuntimeException("can't compute null");
+		if (p1 == null) return;
+		if(this == p1) p1 = this.copy();
 		if (p1 instanceof Polynom) {
 			Iterator<Monom> it = p1.iteretor();
 			while (it.hasNext()) {
 				Monom monom = (Monom) it.next();
-				this.add(monom.flip());	
+				this.add(monom.flip());
 			}
 			this.eraseZeros();
 		} else {
@@ -200,7 +201,7 @@ public class Polynom implements Polynom_able {
 	 */
 	@Override
 	public void multiply(Polynom_able p1) {
-		if (p1 == null || isEmpty()) throw new RuntimeException("can't compute null");
+		if (p1 == null || isEmpty()) ls.clear();
 		if(this == p1) p1 = this.copy();
 		Polynom_able temp2 = this.copy(),temp3 = this.copy();
 		this.substract(temp2);
@@ -248,30 +249,30 @@ public class Polynom implements Polynom_able {
 	@Override
 	public double root(double x0, double x1, double eps) {
 		if (f(x0) * f(x1) > 0) throw new RuntimeException("invalid input");
-		double x = x0 + x1 / 2;
+		double x = (x0 + x1) / 2;
 		double l = x0, r = x1;
 		if(f(x0)<=f(x1))
 		{
 			while (r >= l) {
-				x = l + (r - l) / 2;
 				if (Math.abs(this.f(x)) < eps)
 					return x;
 				if ((this.f(x)) > 0)
 					r=x;
 				else
 					l=x;
+				x = (l + r) / 2;
 			}
 		}
 		else
 		{
 			while (r >= l) {
-				x = l + (r - l) / 2;
 				if (Math.abs(this.f(x)) < eps)
 					return x;
 				if ((this.f(x)) < 0)
-					l=x;
-				else
 					r=x;
+				else
+					l=x;
+				x = (l + r) / 2;
 			}
 		}
 		return -1;
