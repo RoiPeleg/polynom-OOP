@@ -29,14 +29,14 @@ public class Functions_GUI implements functions {
     @Override
     public void saveToFile(String file) throws IOException {
         File file1 = new File(file);
-        if (file1.exists()) throw new RuntimeException("file aleardy exists");
+        if (file1.exists()) file1.delete();
         FileWriter fileWriter = new FileWriter(file1, true);
         Iterator<function> it = ls.iterator();
         while (it.hasNext()) {
             String a = it.next().toString();
             fileWriter.write(a + "\n");
-            fileWriter.close();
         }
+        fileWriter.close();
     }
 
     @Override

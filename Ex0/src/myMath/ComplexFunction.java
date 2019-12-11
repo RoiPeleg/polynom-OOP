@@ -146,7 +146,6 @@ public class ComplexFunction implements complex_function {
 
         } else {
             Polynom_able p = new Polynom();
-            System.out.println(s);
             return p.initFromString(s);
         }
     }
