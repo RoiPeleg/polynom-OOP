@@ -68,10 +68,13 @@ class Functions_GUITest {
     void testSaveToFile() {
         try {
             _data.saveToFile("data.txt");
+            fg = new Functions_GUI();
+             fg.initFromFile("data.txt");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assert (_data.toString().equals(fg.toString()));
+
+       assert (_data.toString().equals(fg.toString()));
     }
 
     //@Test

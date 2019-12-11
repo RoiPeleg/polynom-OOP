@@ -1,11 +1,9 @@
 package myMath;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-
 import java.awt.*;
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class Functions_GUI implements functions {
@@ -14,10 +12,10 @@ public class Functions_GUI implements functions {
     public Functions_GUI() {
         ls = new ArrayList<function>();
     }
-
     @Override
-    public void initFromFile(String file) throws IOException {
-        File fl = new File(file);
+    public void initFromFile(String file) throws IOException {//TODO
+        File fl =
+                new File(file);
         Scanner sc = new Scanner(fl);
         if (ls != null) ls = new ArrayList<function>();
         ComplexFunction cf = new ComplexFunction(new Polynom("2"));
@@ -82,28 +80,7 @@ public class Functions_GUI implements functions {
     }
 
     @Override
-    public void drawFunctions(String json_file) {
-        Gson gson = new Gson();
-        try {
-
-            BufferedReader br = new BufferedReader(
-                    new FileReader(json_file));
-
-            //convert the json string back to object
-            JsonObject obj = gson.fromJson(br, JsonObject.class);
-            int width = obj.get("Width").getAsInt();
-            int height = obj.get("Height").getAsInt();
-            int resolution = obj.get("Resolution").getAsInt();
-            Range rx, ry;
-            JsonArray ja = obj.get("Range_X").getAsJsonArray();
-            rx = new Range(ja.get(0).getAsInt(), ja.get(1).getAsInt());
-            ja = obj.get("Range_Y").getAsJsonArray();
-            ry = new Range(ja.get(0).getAsInt(), ja.get(1).getAsInt());
-            drawFunctions(width, height, rx, ry, resolution);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    public void drawFunctions(String json_file) {//TODO
     }
 
     @Override
@@ -170,13 +147,8 @@ public class Functions_GUI implements functions {
     public void clear() {
         ls.clear();
     }
-
-    public String toString() {
-        return ls.toString();
-    }
-
-    public static void main(String[] args) {
-        Functions_GUI f = new Functions_GUI();
-        f.drawFunctions("GUI_params.txt");
-    }
+public String toString()
+{
+    return ls.toString();
+}
 }

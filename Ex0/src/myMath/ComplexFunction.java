@@ -106,6 +106,9 @@ public class ComplexFunction implements complex_function {
             return stringbuild(s.substring(5));
         }
         int start = s.indexOf('(');
+        if (start == -1) {
+            return new Polynom().initFromString(s);
+        }
         String opi = s.substring(0, start);
         if (opi.equals("plus") || opi.equals("div") || opi.equals("mul") || opi.equals("comp") || opi.equals("max") || opi.equals("min") || opi.equals("none")) {
             return stringbuild(s);
@@ -265,7 +268,10 @@ public class ComplexFunction implements complex_function {
             default:
                 break;
         }
-        s += "(" + left.toString() + "," + right.toString() + ")";
+        if (this.op == Operation.None)
+            s += "(" + left.toString() + ")";
+        else
+            s += "(" + left.toString() + "," + right.toString() + ")";
         return s;
     }
 
