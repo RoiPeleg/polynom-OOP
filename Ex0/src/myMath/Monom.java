@@ -72,6 +72,8 @@ public class Monom implements function {
 				try {
 					if (s.charAt(0) == 'x')
 						this._coefficient = 1.0;
+					else if (s.charAt(0) == '-')
+						this._coefficient = -1;
 					else
 						this._coefficient = Double.parseDouble(s.split("x")[0]);
 					if (s.charAt(s.length() - 1) == 'x') {
@@ -187,7 +189,6 @@ public class Monom implements function {
 
 	@Override
 	public function copy() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Monom(this._coefficient, this._power);
 	}
 }
