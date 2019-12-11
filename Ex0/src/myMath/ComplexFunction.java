@@ -3,7 +3,7 @@ package myMath;
 public class ComplexFunction implements complex_function {
     private function right, left;
     private Operation op;
-
+    private double Epsilon = 0.001;
     public ComplexFunction(String opertion, function cf, function cf2) {
         this.left = cf;
         this.right = cf2;
@@ -240,10 +240,16 @@ public class ComplexFunction implements complex_function {
         return s;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof function) return equals((function) obj, -10, 10);
+
+        return false;
+    }
 
     public boolean equals(function f, int min, int max) {
-        for (double i = min; i < max; i+=000.1)
-            if (this.f(i) != f.f(i)) return false;
+        for (double i = min; i < max; i += 0.5)
+            if (Math.abs(this.f(i) - f.f(i)) > Epsilon) return false;
         return true;
     }
 }
