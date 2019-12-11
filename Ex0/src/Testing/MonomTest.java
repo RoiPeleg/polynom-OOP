@@ -9,14 +9,31 @@ class MonomTest {
 
     @Test
     void derivative() {
+        Monom m = new Monom("x^2");
+        assertTrue(m.derivative().equals(new Monom("2x")));
+        assertTrue(m.derivative().derivative().equals(new Monom("2")));
+        assertTrue(m.derivative().derivative().derivative().equals(new Monom("0")));
+        try {
+            m.derivative().derivative().derivative().derivative();
+        } catch (Exception e) {
+        }
     }
 
     @Test
     void isZero() {
+        assertFalse(new Monom("x^2").isZero());
+        assertTrue(new Monom("0").isZero());
     }
 
     @Test
     void add() {
+        Monom m = new Monom("x^2");
+        m.add(new Monom("2x^2"));
+        assertTrue(m.equals(new Monom("3x^2")));
+        try {
+            m.add(null);
+        } catch (Exception e) {
+        }
     }
 
     @Test
@@ -36,6 +53,10 @@ class MonomTest {
         m3 = new Monom("5x^3");
         m2.multipy(m3);
         assert (m2.equals(new Monom("20x^6")));
+        try {
+            m.multipy(null);
+        } catch (Exception e) {
+        }
     }
 
     @Test
@@ -63,10 +84,16 @@ class MonomTest {
     @Test
     void initFromString() {
         Monom m = new Monom(0, 0);
-        assertTrue(m.initFromString("x^2").equals(new Monom("x^2")));
+        Monom e = new Monom("x^2");
+        m = (Monom) m.initFromString("x^2");
+        assertTrue(m.equals(e));
     }
 
     @Test
     void copy() {
+        Monom e = new Monom("x^2");
+        Monom x = (Monom) e.copy();
+        assertTrue(x.equals(e));
+        assertTrue(((Monom) (new Monom("0")).copy()).equals(new Monom("0")));
     }
 }
