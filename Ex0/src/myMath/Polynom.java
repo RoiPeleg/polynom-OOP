@@ -27,44 +27,50 @@ public class Polynom implements Polynom_able {
 	 *
 	 * @param s: is a string represents a Polynom
 	 */
+
 	public Polynom(String s) {
 		this();
-		ArrayList<Monom> ls1 = new ArrayList<Monom>();
-		boolean firstC = false;
-		Monom neg = new Monom("-1");
-		s = s.replaceAll(" ", "");
-		s.toLowerCase();
-		if(s.length()==0)
-			throw new RuntimeException("not valid Polynom");
+		try
+		{
+			ArrayList<Monom> ls1 = new ArrayList<Monom>();
+			boolean firstC = false;
+			Monom neg = new Monom("-1");
+			s.toLowerCase();
+			if(s.length()==0)
+				throw new RuntimeException("not valid Polynom");
 
-		if (s.charAt(0) == '+') 
-		{
-			s = s.substring(1);	
-		}
-
-		if (s.charAt(0) != '-')
-		{
-			firstC = true;
-		}
-		Monom mm;
-		String signs = s.replaceAll("[0-9]", "").replaceAll("\\^", "").replaceAll("x", "").replaceAll("\\.", "");
-		if (s.charAt(0) == '-') s = s.substring(1);
-		String[] monos = s.split("\\+|\\-");
-		for (int i = 0; i < monos.length; i++)
-		{
-			mm = new Monom(monos[i]);
-			ls.add(mm);
-		}
-		if (firstC) {
-			signs = "+" + signs;
-		}
-		for (int i = 0; i < signs.length(); i++) {
-			if (signs.charAt(i) == '-') {
-				ls.get(i).multipy(neg);
+			if (s.charAt(0) == '+')
+			{
+				s = s.substring(1);
 			}
+
+			if (s.charAt(0) != '-')
+			{
+				firstC = true;
+			}
+			Monom mm;
+			String signs = s.replaceAll("[0-9]", "").replaceAll("\\^", "").replaceAll("x", "").replaceAll("\\.", "");
+			if (s.charAt(0) == '-') s = s.substring(1);
+			String[] monos = s.split("\\+|\\-");
+			for (int i = 0; i < monos.length; i++)
+			{
+				mm = new Monom(monos[i]);
+				ls.add(mm);
+			}
+			if (firstC) {
+				signs = "+" + signs;
+			}
+			for (int i = 0; i < signs.length(); i++) {
+				if (signs.charAt(i) == '-') {
+					ls.get(i).multipy(neg);
+				}
+			}
+			ls.sort(Monom.getComp());
+			this.unify();
 		}
-		ls.sort(Monom.getComp());
-		this.unify();
+		catch (Exception e) {
+			System.out.println("invalid input");
+		}
 	}
 
 	/**
