@@ -36,6 +36,7 @@ public class Polynom implements Polynom_able {
 			boolean firstC = false;
 			Monom neg = new Monom("-1");
 			s.toLowerCase();
+			s = s.replaceAll(" ", "");
 			if(s.length()==0)
 				throw new RuntimeException("not valid Polynom");
 

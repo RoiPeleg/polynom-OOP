@@ -31,11 +31,6 @@ class Functions_GUITest {
         Range rx = new Range(-10, 10);
         Range ry = new Range(-5, 15);
         data.drawFunctions(w, h, rx, ry, res);
-        try {
-            data.saveToFile("data.txt");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     private Functions_GUI _data = null;
@@ -54,11 +49,13 @@ class Functions_GUITest {
         //	fail("Not yet implemented");
     }
 
-    //@Test
+    @Test
     void testInitFromFile() {
         fg = new Functions_GUI();
         try {
+            _data.saveToFile("data.txt");
             fg.initFromFile("data.txt");
+            _data.equals(fg);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,6 +67,7 @@ class Functions_GUITest {
             _data.saveToFile("data.txt");
             fg = new Functions_GUI();
              fg.initFromFile("data.txt");
+            _data.equals(fg);
         } catch (Exception e) {
             e.printStackTrace();
         }
