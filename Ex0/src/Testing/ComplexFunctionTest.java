@@ -20,7 +20,6 @@ public class ComplexFunctionTest {
         String s = "f(x) = plus(div(1.0x^1+1.0,2.0),x^3)";
         ComplexFunction cf = new ComplexFunction(new Polynom("x"));
         function f1 = cf.initFromString(s);
-        System.out.println(f1.toString());
 
         ComplexFunction cf1 = (ComplexFunction) f1;
 
@@ -33,6 +32,10 @@ public class ComplexFunctionTest {
         String s = "f(x) = plus(div(1.0x^1+1.0,2.0),x^3)";
         ComplexFunction cf = new ComplexFunction(new Polynom("x"));
         function f1 = cf.initFromString(s);
+        ComplexFunction cf1 = (ComplexFunction) f1;
+        assert (Math.abs(cf1.root(-1, 0, 0.000001)+0.59)<=0.001);
+
+
 
 
     }
