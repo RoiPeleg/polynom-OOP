@@ -71,9 +71,7 @@ public class Monom implements function {
             try {
                 if (s.charAt(0) == 'x')
                     this._coefficient = 1.0;
-                else if (s.charAt(0) == '-')
-                    this._coefficient = -1.0;
-                else if (s.charAt(0) == '-')
+                else if (s.length()>=2 && s.charAt(0) == '-'&& s.charAt(1) == 'x')
 						this._coefficient = -1;
 					else
                     this._coefficient = Double.parseDouble(s.split("x")[0]);

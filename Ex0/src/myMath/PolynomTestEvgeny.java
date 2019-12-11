@@ -4,18 +4,18 @@ public class PolynomTestEvgeny {
     static int fails = 0;
 
     public static void main(String[] args) {
-        try {
+        /*try {
             test1();
         } catch (Exception e) {
             System.out.println("test1 exception");
             fails = fails + 3;
-        }
+        }*/
         try {
             test2();
         } catch (Exception e) {
             System.out.println("test2 exception");
             fails = fails + 3;
-        }
+        }/*
         try {
             test3();
         } catch (Exception e) {
@@ -46,8 +46,9 @@ public class PolynomTestEvgeny {
             System.out.println("test7 exception");
             fails = fails + 3;
         }
-        System.out.println("num of fails: " + fails);
+        System.out.println("num of fails: " + fails);*/
     }
+
 
     public static boolean compDouble(double a, double b) {
         double diff = a - b;

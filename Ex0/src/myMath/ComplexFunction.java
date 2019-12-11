@@ -41,42 +41,7 @@ public class ComplexFunction implements complex_function {
         this.op = Operation.None;
     }
 
-    public double area(double x0, double x1, double eps) {
-        double sum = 0;
-        for (double i = x0; i < x1; i += eps) {
-            sum += this.f(i) * eps;
-        }
-        return sum;
-    }
 
-    public double root(double x0, double x1, double eps) {
-        if (f(x0) * f(x1) > 0) throw new RuntimeException("invalid input");
-        double x = x0 + x1 / 2;
-        double l = x0, r = x1;
-        if (f(x0) <= f(x1)) {
-            while (r >= l) {
-                x = l + (r - l) / 2;
-                if (Math.abs(this.f(x)) < eps)
-                    return x;
-                if ((this.f(x)) > 0)
-                    r = x;
-                else
-                    l = x;
-            }
-        } else {
-            while (r >= l) {
-                x = l + (r - l) / 2;
-                if (Math.abs(this.f(x)) < eps)
-                    return x;
-                if ((this.f(x)) < 0)
-                    l = x;
-                else
-                    r = x;
-            }
-        }
-        return -1;
-
-    }
 
     @Override
     public double f(double x) {
@@ -240,6 +205,7 @@ public class ComplexFunction implements complex_function {
     }
 
     @Override
+
     public String toString() {
         String s = "";
         switch (this.op) {
@@ -274,8 +240,9 @@ public class ComplexFunction implements complex_function {
         return s;
     }
 
+
     public boolean equals(function f, int min, int max) {
-        for (int i = 0; i < max; i++)
+        for (double i = min; i < max; i+=000.1)
             if (this.f(i) != f.f(i)) return false;
         return true;
     }

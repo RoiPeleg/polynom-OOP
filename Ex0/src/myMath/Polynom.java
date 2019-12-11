@@ -83,6 +83,8 @@ public class Polynom implements Polynom_able {
 				ls.get(i).add(ls.get(i + 1));
 				Monom flip = ls.get(i + 1).flip();
 				ls.get(i + 1).add(flip);
+				eraseZeros();
+				i = -1;
 			}
 		}
 		eraseZeros();

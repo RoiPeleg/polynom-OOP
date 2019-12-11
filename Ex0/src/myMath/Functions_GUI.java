@@ -168,8 +168,8 @@ public class Functions_GUI implements functions {
     public void clear() {
         ls.clear();
     }
-public String toString()
-{
-    return ls.toString();
-}
+    public String toString()
+    {
+        return ls.toString();
+    }
 }
