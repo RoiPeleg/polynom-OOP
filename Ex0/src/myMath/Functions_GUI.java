@@ -1,11 +1,12 @@
 package myMath;
 
-import java.awt.*;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
+import java.awt.*;
+import java.io.*;
+import java.util.*;
 public class Functions_GUI implements functions {
     private ArrayList<function> ls;
 
@@ -80,7 +81,27 @@ public class Functions_GUI implements functions {
     }
 
     @Override
-    public void drawFunctions(String json_file) {//TODO
+    public void drawFunctions(String json_file) {
+        Gson gson = new Gson();
+        try {
+
+            BufferedReader br = new BufferedReader(
+                    new FileReader(json_file));
+
+            //convert the json string back to object
+            JsonObject obj = gson.fromJson(br, JsonObject.class);
+            int width = obj.get("Width").getAsInt();
+            int height = obj.get("Height").getAsInt();
+            int resolution = obj.get("Resolution").getAsInt();
+            Range rx, ry;
+            JsonArray ja = obj.get("Range_X").getAsJsonArray();
+            rx = new Range(ja.get(0).getAsInt(), ja.get(1).getAsInt());
+            ja = obj.get("Range_Y").getAsJsonArray();
+            ry = new Range(ja.get(0).getAsInt(), ja.get(1).getAsInt());
+            drawFunctions(width, height, rx, ry, resolution);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
