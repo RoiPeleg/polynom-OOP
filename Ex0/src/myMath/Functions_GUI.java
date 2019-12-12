@@ -14,9 +14,10 @@ public class Functions_GUI implements functions {
         ls = new ArrayList<function>();
     }
     @Override
-    public void initFromFile(String file) throws IOException {//TODO
-        File fl =
-                new File(file);
+    public void initFromFile(String file) throws IOException {
+        File fl = new File(file);
+        if (!file.endsWith(".txt")) throw new IOException("wrong format");
+        if (!fl.exists()) throw new IOException("file does not exist");
         Scanner sc = new Scanner(fl);
         if (ls != null) ls = new ArrayList<function>();
         ComplexFunction cf = new ComplexFunction(new Polynom("2"));
@@ -30,6 +31,7 @@ public class Functions_GUI implements functions {
     @Override
     public void saveToFile(String file) throws IOException {
         File file1 = new File(file);
+        if (!file1.canWrite()) throw new IOException("can not be write to");
         if (file1.exists()) file1.delete();
         FileWriter fileWriter = new FileWriter(file1, true);
         Iterator<function> it = ls.iterator();
