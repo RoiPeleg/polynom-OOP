@@ -61,12 +61,15 @@ public class Functions_GUI implements functions {
         }
         Iterator<function> it = ls.iterator();
         function f;
+        int index = 0;
         while (it.hasNext()) {
             f = it.next();
             r = rand.nextFloat();
             g = rand.nextFloat();
             b = rand.nextFloat();
             Color randomColor = new Color(r, g, b);
+            System.out.println(index + ") " + randomColor.toString() + " f(x) = " + f.toString());
+            index++;
             StdDraw.setPenColor(randomColor);
             StdDraw.setPenRadius(0.005);
             double[] x = new double[resolution + 1];

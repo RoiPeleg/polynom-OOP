@@ -26,6 +26,7 @@ import java.util.Iterator;
  */
 class Functions_GUITest {
     public static void main(String[] a) {
+        System.out.println("dd");
         Functions_GUI data = FunctionsFactory();
         int w = 1000, h = 600, res = 200;
         Range rx = new Range(-10, 10);
