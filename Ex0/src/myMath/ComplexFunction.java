@@ -36,6 +36,7 @@ public class ComplexFunction implements complex_function {
         }
     }
 
+
     public ComplexFunction(function p3) {
         this.left = p3;
         this.op = Operation.None;
