@@ -240,7 +240,7 @@ public class Polynom implements Polynom_able {
 				if (!it.hasNext()) return false;
 				if (!monom.equals(it.next())) return false;
 			}
-			return true;
+			return !it.hasNext();
 		}
 		return false;
 	}
@@ -312,7 +312,7 @@ public class Polynom implements Polynom_able {
 	@Override
 	public Polynom_able derivative() {
 		if (this.isEmpty())
-			return null;
+			return new Polynom();
 		Polynom_able p = new Polynom();
 		for (Monom monom : ls) {
 			p.add(monom.derive());

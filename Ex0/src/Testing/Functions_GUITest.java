@@ -25,7 +25,7 @@ import java.util.Iterator;
  * @author boaz_benmoshe
  */
 class Functions_GUITest {
-    public static void main(String[] a) {
+    public static void main(String[] args) {
         System.out.println("dd");
         Functions_GUI data = FunctionsFactory();
         int w = 1000, h = 600, res = 200;

@@ -16,23 +16,10 @@ import java.util.Iterator;
 
 public class ComplexFunctionTest {
 
-    public static void main(String[] args)
-    {
-        f();
-        initFromString();
-        copy();
-        max();
-        min();
-        plus();
-        mul();
-        div();
-        comp();
-        testEquals();
 
-    }
 
     @Test
-    static public void f() {
+     public void f() {
         ComplexFunction cf = new ComplexFunction(new Polynom("x"));
 
         String s1 = "f(x) = plus(div(1.0x^1+1.0,2.0),x^3)";
@@ -54,7 +41,7 @@ public class ComplexFunctionTest {
     }
 
     @Test
-    static public void initFromString() {
+    public void initFromString() {
 
 
         ComplexFunction a = new ComplexFunction(new Polynom("x"));
@@ -87,7 +74,7 @@ public class ComplexFunctionTest {
     }
 
     @Test
-    static public void copy() {
+     public void copy() {
         ComplexFunction cf = new ComplexFunction(new Polynom("x"));
 
         String s1 = "f(x) = plus(div(1.0x^1+1.0,2.0),x^3)";
@@ -106,7 +93,7 @@ public class ComplexFunctionTest {
     }
 
     @Test
-    static public void max() {
+     public void max() {
         ComplexFunction cf = new ComplexFunction(new Polynom("x"));
 
         String s1 = "f(x) = max(max(6.0x^2+1.0,2.0),x^3)";
@@ -124,7 +111,7 @@ public class ComplexFunctionTest {
     }
 
     @Test
-    static public void min() {
+     public void min() {
         ComplexFunction cf = new ComplexFunction(new Polynom("x"));
 
         String s1 = "f(x) = min(min(6.0x^2+1.0,x^5),7x^3)";
@@ -142,7 +129,7 @@ public class ComplexFunctionTest {
     }
 
     @Test
-    static public void plus() {
+     public void plus() {
         ComplexFunction cf = new ComplexFunction(new Polynom("x"));
         String s1 = "f(x) = plus(div(1.0x^1+1.0,2.0),x^3)";
         function f1 = cf.initFromString(s1);
@@ -166,7 +153,7 @@ public class ComplexFunctionTest {
     }
 
     @Test
-    static public void mul() {
+     public void mul() {
         ComplexFunction cf = new ComplexFunction(new Polynom("x"));
         String s1 = "f(x) = mul(mul(1.4x^2-1.0-1+7,2.0),x^3)";
         function f1 = cf.initFromString(s1);
@@ -187,7 +174,7 @@ public class ComplexFunctionTest {
     }
 
     @Test
-    static public void div() {
+     public void div() {
         ComplexFunction cf = new ComplexFunction(new Polynom("x"));
         String s1 = "f(x) = div(div(1.4x^2-1.0-1+7,2.0),x^3)";
         function f1 = cf.initFromString(s1);
@@ -204,7 +191,7 @@ public class ComplexFunctionTest {
     }
 
     @Test
-     static public void comp() {
+      public void comp() {
 
         ComplexFunction cf = new ComplexFunction(new Polynom("x"));
         String s1 = "f(x) = comp(comp(1.4x^2-1.0-1+7,-2.0x),9x^3)";
@@ -223,7 +210,7 @@ public class ComplexFunctionTest {
     }
 
     @Test
-    static public void testEquals() {
+     public void testEquals() {
 
         ComplexFunction cf = new ComplexFunction(new Polynom("x"));
 
